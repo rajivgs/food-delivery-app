@@ -26,7 +26,7 @@ class AppRouter {
         return RestaurantScreen.route();
       case VoucherScreen.routeName:
         return VoucherScreen.route();
-        break;
+
       default:
         return _errorRoute();
     }
