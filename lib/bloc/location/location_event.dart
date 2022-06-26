@@ -9,7 +9,14 @@ abstract class LocationEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadMap extends LocationEvent {}
+class LoadMap extends LocationEvent {
+  final GoogleMapController? controller;
+
+  LoadMap({this.controller});
+
+  @override
+  List<Object?> get props => [controller];
+}
 
 class Updatelocation extends LocationEvent {
   final Position position;

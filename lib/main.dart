@@ -8,6 +8,7 @@ import 'package:food_delivery_app/config/app_router.dart';
 import 'package:food_delivery_app/repository/geoLocationRepository/geolocation_repository.dart';
 import 'package:food_delivery_app/repository/place/place_repository.dart';
 
+import 'bloc/place/place_bloc.dart';
 import 'config/theme.dart';
 import 'screens/screen.dart';
 
@@ -36,13 +37,16 @@ class MyApp extends StatelessWidget {
               create: (context) => AutocompleteBloc(
                   placesRepository: context.read<PlacesRepository>())
                 ..add(LoadAutocomplete())),
+          BlocProvider(
+              create: (context) => PlaceBloc(
+                  placesRepository: context.read<PlacesRepository>())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Food Delivery',
           theme: theme(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: LocationScreen.routeName,
+          initialRoute: HomeScreen.routeName,
         ),
       ),
     );
