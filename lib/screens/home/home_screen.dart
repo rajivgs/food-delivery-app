@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../model/model.dart';
+import '../../model/promo_box_model.dart';
 import '../../widget/widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
           child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -38,14 +40,31 @@ class HomeScreen extends StatelessWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: Promo.promos.length,
                 itemBuilder: (context, index) {
-                  return PromoBox();
+                  return PromoBox(
+                    promo: Promo.promos[index],
+                  );
                 },
               ),
             ),
           ),
           FoodSearchBox(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+                alignment: Alignment.topLeft,
+                child: Text("Top Rated",
+                    style: Theme.of(context).textTheme.headline4)),
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: Restaurant.restaurants.length,
+              itemBuilder: ((context, index) {
+                return RestaurantCard(
+                    restaurant: Restaurant.restaurants[index]);
+              }))
         ],
       )),
     );
