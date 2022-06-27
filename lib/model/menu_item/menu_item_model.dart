@@ -7,11 +7,13 @@ class MenuItem extends Equatable {
   final int restaurantId;
   final String name;
   final String description;
+  final String category;
   final double price;
   //final String imageUrl;
 
   MenuItem({
     required this.id,
+    required this.category,
     required this.restaurantId,
     required this.name,
     required this.description,
@@ -19,14 +21,23 @@ class MenuItem extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, restaurantId, name, description, price];
+  List<Object> get props {
+    return [
+      id,
+      restaurantId,
+      name,
+      description,
+      category,
+      price,
+    ];
+  }
 
   static List<MenuItem> menuItems = [
     MenuItem(
       id: 1,
       restaurantId: 1,
       name: 'Margherita',
-      //category: 'Pizza',
+      category: 'Pizza',
       description: 'Tomatoes, mozzarella, basil',
       price: 4.99,
     ),
@@ -34,7 +45,7 @@ class MenuItem extends Equatable {
       id: 2,
       restaurantId: 2,
       name: '4 Formaggi',
-      //category: 'Pizza',
+      category: 'Pizza',
       description: 'Tomatoes, mozzarella, basil',
       price: 4.99,
     ),
@@ -42,7 +53,7 @@ class MenuItem extends Equatable {
       id: 3,
       restaurantId: 3,
       name: 'Baviera',
-      //category: 'Pizza',
+      category: 'Pizza',
       description: 'Tomatoes, mozzarella, basil',
       price: 4.99,
     ),
@@ -50,7 +61,7 @@ class MenuItem extends Equatable {
       id: 4,
       restaurantId: 4,
       name: 'Coca Cola',
-      //category: 'Drinks',
+      category: 'Drinks',
       description: 'A fresh drink',
       price: 1.99,
     )

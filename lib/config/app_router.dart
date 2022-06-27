@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/screens/screen.dart';
 
+import '../model/model.dart';
+
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print('The Route is: ${settings.name}');
@@ -22,8 +24,12 @@ class AppRouter {
         return DeliveryScreen.route();
       case FilterScreen.routeName:
         return FilterScreen.route();
-      case RestaurantScreen.routeName:
-        return RestaurantScreen.route();
+      case RestaurantDetailsScreen.routeName:
+        return RestaurantDetailsScreen.route(
+            restaurant: settings.arguments as Restaurant);
+      case RestaurantListingScreen.routeName:
+        return RestaurantListingScreen.route(
+            restaurant: settings.arguments as List<Restaurant>);
       case VoucherScreen.routeName:
         return VoucherScreen.route();
 

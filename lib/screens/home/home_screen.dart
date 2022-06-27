@@ -7,74 +7,81 @@ import '../../model/promo_box_model.dart';
 import '../../widget/widget.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = '/';
+
   const HomeScreen({Key? key}) : super(key: key);
+
+  static Route route() {
+    return MaterialPageRoute(
+      builder: (_) => HomeScreen(),
+      settings: RouteSettings(name: routeName),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
-          child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: Category.categories.length,
-                itemBuilder: (context, index) {
-                  return CategoryBox(category: Category.categories[index]);
-                },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // List of categories below address
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 100.0,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: Category.categories.length,
+                  itemBuilder: (context, index) {
+                    return CategoryBox(category: Category.categories[index]);
+                  },
+                ),
               ),
             ),
-          ),
-          //Promo Box
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 125,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 125.0,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: Promo.promos.length,
+                  itemBuilder: (context, index) {
+                    return PromoBox(promo: Promo.promos[index]);
+                  },
+                ),
+              ),
+            ),
+            FoodSearchBox(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Top Rated',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: Promo.promos.length,
+                itemCount: Restaurant.restaurants.length,
                 itemBuilder: (context, index) {
-                  return PromoBox(
-                    promo: Promo.promos[index],
+                  return RestaurantCard(
+                    restaurant: Restaurant.restaurants[index],
                   );
                 },
               ),
             ),
-          ),
-          FoodSearchBox(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: Text("Top Rated",
-                    style: Theme.of(context).textTheme.headline4)),
-          ),
-          ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: Restaurant.restaurants.length,
-              itemBuilder: ((context, index) {
-                return RestaurantCard(
-                    restaurant: Restaurant.restaurants[index]);
-              }))
-        ],
-      )),
-    );
-  }
-
-  static const String routeName = '/';
-  static Route route() {
-    return MaterialPageRoute(
-      builder: (_) => const HomeScreen(),
-      settings: const RouteSettings(name: routeName),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -88,7 +95,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.person),
+        icon: Icon(Icons.person, color: Colors.white),
         onPressed: () {},
       ),
       centerTitle: false,
@@ -96,18 +103,16 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Current Location",
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1!
-                .copyWith(color: Colors.white),
+            'CURRENT LOCATION',
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: Colors.white,
+                ),
           ),
           Text(
-            "Nepal, 3 Sitalpati Way",
-            style: Theme.of(context)
-                .textTheme
-                .headline6!
-                .copyWith(color: Colors.white),
+            'Singapore, 1 Shenton Way',
+            style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: Colors.white,
+                ),
           ),
         ],
       ),

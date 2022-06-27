@@ -26,15 +26,18 @@ class Restaurant extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        id,
-        imageUrl,
-        name,
-        tags,
-        deliveryTime,
-        deliveryFee,
-        distance,
-      ];
+  List<Object> get props {
+    return [
+      id,
+      imageUrl,
+      name,
+      tags,
+      menuItems,
+      deliveryTime,
+      deliveryFee,
+      distance,
+    ];
+  }
 
   static List<Restaurant> restaurants = [
     Restaurant(
@@ -42,15 +45,15 @@ class Restaurant extends Equatable {
       name: 'Golden Ice Gelato Artigianale',
       imageUrl:
           'https://images.unsplash.com/photo-1479044769763-c28e05b5baa5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      // tags: MenuItem.menuItems
-      //     .where((menuItem) => menuItem.restaurantId == 1)
-      //     .map((menuItem) => menuItem.category)
-      //     .toSet()
-      //     .toList(),
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 1)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 1)
           .toList(),
-      tags: ['Italian', 'Dessert', 'Ice Cream'],
+      //  tags: ['Italian', 'Dessert', 'Ice Cream'],
       deliveryTime: 30,
       deliveryFee: 2.99,
       distance: 0.1,
@@ -60,29 +63,28 @@ class Restaurant extends Equatable {
       name: 'Il Panino del Laghetto',
       imageUrl:
           'https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      // tags: MenuItem.menuItems
-      //     .where((menuItem) => menuItem.restaurantId == 2)
-      //     .map((menuItem) => menuItem.category)
-      //     .toList(),
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 2)
+          .map((menuItem) => menuItem.category)
+          .toList(),
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 2)
           .toList(),
-      tags: ['Italian', 'Dessert', 'Ice Cream'],
+      //  tags: ['Italian', 'Dessert', 'Ice Cream'],
       deliveryTime: 30,
       deliveryFee: 2.99,
       distance: 0.1,
     ),
     Restaurant(
-      id: 3, tags: ['Italian', 'Dessert', 'Ice Cream'],
-
+      id: 3,
       name: 'Viaggi Nel Gusto',
       imageUrl:
           'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
-      // tags: MenuItem.menuItems
-      //     .where((menuItem) => menuItem.restaurantId == 3)
-      //     .map((menuItem) => menuItem.category)
-      //     .toSet()
-      //     .toList(),
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 3)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 3)
           .toList(),
@@ -92,16 +94,16 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 4,
-      tags: ['Italian', 'Dessert', 'Ice Cream'],
+      //  tags: ['Italian', 'Dessert', 'Ice Cream'],
 
       name: 'Burgers',
       imageUrl:
           'https://images.unsplash.com/photo-1550547660-d9450f859349?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80',
-      // tags: MenuItem.menuItems
-      //     .where((menuItem) => menuItem.restaurantId == 4)
-      //     .map((menuItem) => menuItem.category)
-      //     .toSet()
-      //     .toList(),
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 4)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 4)
           .toList(),
@@ -114,15 +116,15 @@ class Restaurant extends Equatable {
       name: 'Tandoori Bites',
       imageUrl:
           'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      // tags: MenuItem.menuItems
-      //     .where((menuItem) => menuItem.restaurantId == 5)
-      //     .map((menuItem) => menuItem.category)
-      //     .toSet()
-      //     .toList(),
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 5)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 5)
           .toList(),
-      tags: ['Italian', 'Dessert', 'Ice Cream'],
+      //  tags: ['Italian', 'Dessert', 'Ice Cream'],
 
       deliveryTime: 30,
       deliveryFee: 2.99,
