@@ -39,6 +39,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   ) async {
     final state = this.state as LocationLoaded;
     LocationLoaded(position: state.position);
+    emit(LocationLoaded(position: state.position));
   }
 
   @override

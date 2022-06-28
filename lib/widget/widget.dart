@@ -7,3 +7,5 @@ export 'restaurant_card.dart';
 export 'restaurant_information.dart';
 export 'restaurant_tags.dart';
 export 'custom_app_bar.dart';
+export 'custom_category_filter.dart';
+export 'custom_price_filter.dart';
