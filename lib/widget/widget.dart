@@ -6,3 +6,4 @@ export 'food_search_box.dart';
 export 'restaurant_card.dart';
 export 'restaurant_information.dart';
 export 'restaurant_tags.dart';
+export 'custom_app_bar.dart';
