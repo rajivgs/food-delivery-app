@@ -10,9 +10,10 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   BasketBloc() : super(BasketLoading()) {
     //  on<BasketEvent>((event, emit) {});
     on<StartBasket>(_mapStartBasketToState);
-    on<AddBasket>(_mapAddBasketToState);
-    on<RemoveBasket>(_mapRemovetBasketToState);
+    on<AddItem>(_mapAddBasketToState);
+    on<RemoveItem>(_mapRemovetBasketToState);
     on<ToggleSwitch>(_mapToggleSwitchToState);
+    on<RemoveAllItem>(_mapRemoveAllItemBasketToState);
   }
 
   void _mapStartBasketToState(
@@ -24,7 +25,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     } catch (_) {}
   }
 
-  void _mapAddBasketToState(AddBasket event, Emitter<BasketState> emit) async {
+  void _mapAddBasketToState(AddItem event, Emitter<BasketState> emit) async {
     final state = this.state;
     if (state is BasketLoaded) {
       try {
@@ -39,13 +40,26 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   }
 
   void _mapRemovetBasketToState(
-      RemoveBasket event, Emitter<BasketState> emit) async {
+      RemoveItem event, Emitter<BasketState> emit) async {
     final state = this.state;
     if (state is BasketLoaded) {
       try {
         emit(BasketLoaded(
             basket: state.basket.copyWith(
                 items: List.from(state.basket.items)..remove(event.item))));
+      } catch (_) {}
+    }
+  }
+
+  void _mapRemoveAllItemBasketToState(
+      RemoveAllItem event, Emitter<BasketState> emit) async {
+    final state = this.state;
+    if (state is BasketLoaded) {
+      try {
+        emit(BasketLoaded(
+            basket: state.basket.copyWith(
+                items: List.from(state.basket.items)
+                  ..removeWhere((item) => item == event.item))));
       } catch (_) {}
     }
   }

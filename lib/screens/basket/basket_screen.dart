@@ -22,7 +22,11 @@ class BasketScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("basket"),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/edit-basket');
+                },
+                icon: Icon(Icons.edit)),
           ],
         ),
         bottomNavigationBar: BottomAppBar(
@@ -258,52 +262,68 @@ class BasketScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 234, 231, 231),
                       borderRadius: BorderRadius.circular(5.0)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Subtotal',
-                              style: Theme.of(context).textTheme.headline6),
-                          Text('\$20.00',
-                              style: Theme.of(context).textTheme.headline6),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Delivery Fee',
-                              style: Theme.of(context).textTheme.headline6),
-                          Text('\$5.00',
-                              style: Theme.of(context).textTheme.headline6),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Divider(
-                        height: 5,
-                        color: Color.fromARGB(255, 169, 165, 165),
-                        thickness: 3,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(
-                                      color: Theme.of(context).primaryColor)),
-                          Text('\$25.00',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(
-                                      color: Theme.of(context).primaryColor)),
-                        ],
-                      )
-                    ],
+                  child: BlocBuilder<BasketBloc, BasketState>(
+                    builder: (context, state) {
+                      if (state is BasketLoading) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (state is BasketLoaded) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Subtotal',
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                                Text('\$${state.basket.subtotalString}',
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Delivery Fee',
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                                Text('\$5.00',
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Divider(
+                              height: 5,
+                              color: Color.fromARGB(255, 169, 165, 165),
+                              thickness: 3,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Total',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .primaryColor)),
+                                Text('\$${state.basket.totalString}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .primaryColor)),
+                              ],
+                            )
+                          ],
+                        );
+                      } else {
+                        return Text("Semothing is Wrong");
+                      }
+                    },
                   ),
                 )
               ],

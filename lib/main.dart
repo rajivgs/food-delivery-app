@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           title: 'Food Delivery',
           theme: theme(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: BasketScreen.routeName,
+          initialRoute: HomeScreen.routeName,
         ),
       ),
     );
