@@ -10,11 +10,13 @@ class Restaurant extends Equatable {
   final String name;
   final List<String> tags;
   final List<MenuItem> menuItems;
+  final String priceCategory;
   final int deliveryTime;
   final double deliveryFee;
   final double distance;
 
   const Restaurant({
+    required this.priceCategory,
     required this.menuItems,
     required this.id,
     required this.imageUrl,
@@ -36,11 +38,13 @@ class Restaurant extends Equatable {
       deliveryTime,
       deliveryFee,
       distance,
+      priceCategory,
     ];
   }
 
   static List<Restaurant> restaurants = [
     Restaurant(
+      priceCategory: '\$ ',
       id: 1,
       name: 'Golden Ice Gelato Artigianale',
       imageUrl:
@@ -59,6 +63,7 @@ class Restaurant extends Equatable {
       distance: 0.1,
     ),
     Restaurant(
+      priceCategory: '\$ ',
       id: 2,
       name: 'Il Panino del Laghetto',
       imageUrl:
@@ -77,6 +82,7 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 3,
+      priceCategory: '\$ ',
       name: 'Viaggi Nel Gusto',
       imageUrl:
           'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
@@ -94,8 +100,7 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 4,
-      //  tags: ['Italian', 'Dessert', 'Ice Cream'],
-
+      priceCategory: '\$ ',
       name: 'Burgers',
       imageUrl:
           'https://images.unsplash.com/photo-1550547660-d9450f859349?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80',
@@ -113,6 +118,7 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 5,
+      priceCategory: '\$ ',
       name: 'Tandoori Bites',
       imageUrl:
           'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
