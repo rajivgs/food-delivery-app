@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            //***************** Promo Event  ******************/
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -55,7 +56,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             FoodSearchBox(),
+            // ***************** Top Rated Heading ******************/
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Align(
@@ -66,6 +69,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            /****List of Top Rated Restaurant */
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
@@ -84,41 +88,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.person, color: Colors.white),
-        onPressed: () {},
-      ),
-      centerTitle: false,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'CURRENT LOCATION',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          Text(
-            'Singapore, 1 Shenton Way',
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(56);
 }

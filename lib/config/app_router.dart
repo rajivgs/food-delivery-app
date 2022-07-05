@@ -1,6 +1,7 @@
 // ignore_for_file: no_duplicate_case_values, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/screens/basket/edit_basket/edit_basket_screen.dart';
 import 'package:food_delivery_app/screens/screen.dart';
 
 import '../model/model.dart';
@@ -18,6 +19,8 @@ class AppRouter {
         return LocationScreen.route();
       case BasketScreen.routeName:
         return BasketScreen.route();
+      case EditBasketScreen.routeName:
+        return EditBasketScreen.route();
       case CheckoutScreen.routeName:
         return CheckoutScreen.route();
       case DeliveryScreen.routeName:

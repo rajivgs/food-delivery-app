@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/basket/basket_bloc.dart';
 import '../../model/model.dart';
 import '../../widget/widget.dart';
 
@@ -37,9 +39,11 @@ class RestaurantDetailsScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 shape: RoundedRectangleBorder(),
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/basket');
+              },
               child: Text('Basket'),
             ),
           ],
@@ -89,7 +93,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
           child: Text(
             restaurant.tags[index],
             style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
           ),
         ),
@@ -122,10 +126,20 @@ class RestaurantDetailsScreen extends StatelessWidget {
                               '\$${menuItem.price}',
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
-                            IconButton(
-                              icon: Icon(Icons.add_circle,
-                                  color: Theme.of(context).accentColor),
-                              onPressed: () {},
+                            BlocBuilder<BasketBloc, BasketState>(
+                              builder: (context, state) {
+                                return IconButton(
+                                  icon: Icon(Icons.add_circle,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                  onPressed: () {
+                                    context.read<BasketBloc>().add(
+                                          AddItem(menuItem),
+                                        );
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),
