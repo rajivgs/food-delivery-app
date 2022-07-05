@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-import '../../models/category_filter_model.dart';
-import '../../models/price_filter_model.dart';
+part of 'filter_bloc.dart';
 
 abstract class FilterEvent extends Equatable {
   const FilterEvent();

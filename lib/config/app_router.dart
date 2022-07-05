@@ -1,15 +1,11 @@
-// ignore_for_file: no_duplicate_case_values, avoid_print
-
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/screens/basket/edit_basket/edit_basket_screen.dart';
-import 'package:food_delivery_app/screens/screen.dart';
 
-import '../model/model.dart';
+import '../models/models.dart';
+import '../screens/screens.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
-    print('The Route is: ${settings.name}');
-
+    print('Route: ${settings.name}');
     switch (settings.name) {
       case '/':
         return HomeScreen.route();
@@ -17,24 +13,22 @@ class AppRouter {
         return HomeScreen.route();
       case LocationScreen.routeName:
         return LocationScreen.route();
-      case BasketScreen.routeName:
-        return BasketScreen.route();
-      case EditBasketScreen.routeName:
-        return EditBasketScreen.route();
-      case CheckoutScreen.routeName:
-        return CheckoutScreen.route();
-      case DeliveryScreen.routeName:
-        return DeliveryScreen.route();
       case FilterScreen.routeName:
         return FilterScreen.route();
+      case BasketScreen.routeName:
+        return BasketScreen.route();
+      case VoucherScreen.routeName:
+        return VoucherScreen.route();
+      case DeliveryTimeScreen.routeName:
+        return DeliveryTimeScreen.route();
+      case EditBasketScreen.routeName:
+        return EditBasketScreen.route();
       case RestaurantDetailsScreen.routeName:
         return RestaurantDetailsScreen.route(
             restaurant: settings.arguments as Restaurant);
       case RestaurantListingScreen.routeName:
         return RestaurantListingScreen.route(
-            restaurant: settings.arguments as List<Restaurant>);
-      case VoucherScreen.routeName:
-        return VoucherScreen.route();
+            restaurants: settings.arguments as List<Restaurant>);
 
       default:
         return _errorRoute();
@@ -43,10 +37,15 @@ class AppRouter {
 
   static Route _errorRoute() {
     return MaterialPageRoute(
+      settings: const RouteSettings(name: '/error'),
       builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text("Error")),
+        appBar: AppBar(
+          title: const Text('Error'),
+        ),
+        body: const Center(
+          child: Text('Something went wrong!'),
+        ),
       ),
-      settings: const RouteSettings(name: "/error"),
     );
   }
 }

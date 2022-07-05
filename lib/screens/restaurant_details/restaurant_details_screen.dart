@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../bloc/basket/basket_bloc.dart';
-import '../../model/model.dart';
-import '../../widget/widget.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../../widgets/widgets.dart';
 
 class RestaurantDetailsScreen extends StatelessWidget {
   static const String routeName = '/restaurant-details';
@@ -19,8 +16,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
 
   final Restaurant restaurant;
 
-  const RestaurantDetailsScreen({Key? key, required this.restaurant})
-      : super(key: key);
+  const RestaurantDetailsScreen({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
@@ -129,14 +125,14 @@ class RestaurantDetailsScreen extends StatelessWidget {
                             BlocBuilder<BasketBloc, BasketState>(
                               builder: (context, state) {
                                 return IconButton(
-                                  icon: Icon(Icons.add_circle,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
+                                  icon: Icon(
+                                    Icons.add_circle,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
                                   onPressed: () {
-                                    context.read<BasketBloc>().add(
-                                          AddItem(menuItem),
-                                        );
+                                    context.read<BasketBloc>()
+                                      ..add(AddItem(menuItem));
                                   },
                                 );
                               },

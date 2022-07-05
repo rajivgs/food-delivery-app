@@ -1,40 +1,40 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_app/bloc/autocomplete/autocomplete_bloc.dart';
-import 'package:food_delivery_app/bloc/basket/basket_bloc.dart';
-import 'package:food_delivery_app/bloc/filter/filter_bloc.dart';
-import 'package:food_delivery_app/bloc/location/location_bloc.dart';
-import 'package:food_delivery_app/config/app_router.dart';
-import 'package:food_delivery_app/repository/geoLocationRepository/geolocation_repository.dart';
-import 'package:food_delivery_app/repository/place/place_repository.dart';
 
-import 'bloc/place/place_bloc.dart';
+import 'blocs/blocs.dart';
+import 'repositories/repositories.dart';
 import 'config/theme.dart';
-import 'screens/screen.dart';
+import 'config/app_router.dart';
+import 'screens/screens.dart';
+import 'simple_bloc_observer.dart';
 
 void main() async {
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () {
+      runApp(MyApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<GeolocationRepository>(
-            create: (_) => GeolocationRepository()),
-        RepositoryProvider<PlacesRepository>(create: (_) => PlacesRepository()),
+          create: (_) => GeolocationRepository(),
+        ),
+        RepositoryProvider<PlacesRepository>(
+          create: (_) => PlacesRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => LocationBloc(
-                  locationRepository: context.read<GeolocationRepository>())
-                ..add(LoadMap())),
+              create: (context) => GeolocationBloc(
+                  geolocationRepository: context.read<GeolocationRepository>())
+                ..add(LoadGeolocation())),
           BlocProvider(
               create: (context) => AutocompleteBloc(
                   placesRepository: context.read<PlacesRepository>())
@@ -42,12 +42,22 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => PlaceBloc(
                   placesRepository: context.read<PlacesRepository>())),
-          BlocProvider(create: (context) => FilterBloc()..add(FilterLoad())),
-          BlocProvider(create: ((context) => BasketBloc()..add(StartBasket())))
+          BlocProvider(
+            create: (context) => FilterBloc()
+              ..add(
+                LoadFilter(),
+              ),
+          ),
+          BlocProvider(
+            create: (context) => BasketBloc()
+              ..add(
+                StartBasket(),
+              ),
+          )
         ],
         child: MaterialApp(
+          title: 'FoodDelivery',
           debugShowCheckedModeBanner: false,
-          title: 'Food Delivery',
           theme: theme(),
           onGenerateRoute: AppRouter.onGenerateRoute,
           initialRoute: HomeScreen.routeName,

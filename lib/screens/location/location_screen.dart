@@ -1,17 +1,13 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:food_delivery_app/bloc/autocomplete/autocomplete_bloc.dart';
-import 'package:food_delivery_app/bloc/location/location_bloc.dart';
-import 'package:food_delivery_app/widget/gmap.dart';
 
-import '../../bloc/place/place_bloc.dart';
-import '../../widget/location_search_box.dart';
+import '../../blocs/blocs.dart';
+import '../../widgets/widgets.dart';
 
 class LocationScreen extends StatelessWidget {
   static const String routeName = '/location';
+
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => LocationScreen(),
@@ -19,50 +15,55 @@ class LocationScreen extends StatelessWidget {
     );
   }
 
-  const LocationScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<PlaceBloc, PlaceState>(
-      builder: (context, state) {
-        if (state is PlaceLoading) {
-          return Stack(
-            children: [
-              SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  child: BlocBuilder<LocationBloc, LocationState>(
-                    builder: (context, state) {
-                      if (state is LocationLoading) {
-                        print("Location Loading ---- ");
-                        return CircularProgressIndicator();
-                      } else if (state is LocationLoaded) {
-                        print("Location Loaded or Updated -----");
-                        return Gmap(
+    return Scaffold(
+      body: BlocBuilder<PlaceBloc, PlaceState>(
+        builder: (context, state) {
+          if (state is PlaceLoading) {
+            return Stack(
+              children: [
+                BlocBuilder<GeolocationBloc, GeolocationState>(
+                  builder: (context, state) {
+                    if (state is GeolocationLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is GeolocationLoaded) {
+                      return Stack(
+                        children: [
+                          Gmap(
                             lat: state.position.latitude,
-                            lng: state.position.longitude);
-                      } else {
-                        return Text("Something is wrong ");
-                      }
-                    },
-                  )),
-              SaveButton(),
-              Location(),
-            ],
-          );
-        } else if (state is PlaceLoaded) {
-          return Stack(
-            children: [
-              Gmap(lat: state.place.lat, lng: state.place.lng),
-              SaveButton(),
-              Location(),
-            ],
-          );
-        } else {
-          return Text("Something went Wrong!!!");
-        }
-      },
-    ));
+                            lng: state.position.longitude,
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Text('Something went wrong!');
+                    }
+                  },
+                ),
+                SaveButton(),
+                Location(),
+              ],
+            );
+          } else if (state is PlaceLoaded) {
+            return Stack(
+              children: [
+                Gmap(
+                  lat: state.place.lat,
+                  lng: state.place.lon,
+                ),
+                SaveButton(),
+                Location(),
+              ],
+            );
+          } else {
+            return Text('Something went wrong!');
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -77,58 +78,67 @@ class Location extends StatelessWidget {
       top: 40,
       left: 20,
       right: 20,
-      child: SizedBox(
-        height: 100,
+      child: Container(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SvgPicture.asset(
               'assets/logo.svg',
               height: 50,
             ),
-            SizedBox(width: 10),
+            SizedBox(
+              width: 10,
+            ),
             Expanded(
-                child: SingleChildScrollView(
               child: Column(
                 children: [
                   LocationSearchBox(),
                   BlocBuilder<AutocompleteBloc, AutocompleteState>(
-                      builder: (context, state) {
-                    if (state is AutocompleteLoading) {
-                      print("AutoCompleted Loading state running");
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state is AutocompleteLoaded) {
-                      print("AutoCompleted Loaded");
-                      return Container(
-                          margin: const EdgeInsets.all(8.0),
+                    builder: (context, state) {
+                      if (state is AutocompleteLoading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is AutocompleteLoaded) {
+                        return Container(
+                          margin: const EdgeInsets.all(8),
                           height: 300,
-                          color: state.autocomplete.isNotEmpty
-                              ? Colors.black.withOpacity(0.5)
-                              : Colors.black.withOpacity(0.5),
+                          color: state.autocomplete.length > 0
+                              ? Colors.black.withOpacity(0.6)
+                              : Colors.transparent,
                           child: ListView.builder(
-                              itemCount: state.autocomplete.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: Text(
-                                    state.autocomplete[index].description,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6!
-                                        .copyWith(color: Colors.white),
-                                  ),
-                                  onTap: () {
-                                    context.read<PlaceBloc>().add(LoadPlace(
-                                        placeId:
-                                            state.autocomplete[index].placeId));
-                                  },
-                                );
-                              }));
-                    } else {
-                      return Text("Something went wrong!");
-                    }
-                  })
+                            itemCount: state.autocomplete.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(
+                                  state.autocomplete[index].description,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                        color: Colors.white,
+                                      ),
+                                ),
+                                onTap: () {
+                                  context.read<PlaceBloc>().add(
+                                        LoadPlace(
+                                          placeId:
+                                              state.autocomplete[index].placeId,
+                                        ),
+                                      );
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      } else {
+                        return Text('Something went wrong!');
+                      }
+                    },
+                  )
                 ],
               ),
-            )),
+            ),
           ],
         ),
       ),

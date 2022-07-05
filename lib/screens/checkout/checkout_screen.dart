@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class CheckoutScreen extends StatelessWidget {
   static const String routeName = '/checkout';
+
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => CheckoutScreen(),
@@ -11,19 +10,17 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  const CheckoutScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("checkout"),
-      ),
-      body: ElevatedButton(
-        child: Text('Location Screen'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/location');
-        },
+      appBar: AppBar(title: Text('Checkout')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Home Screen'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
+        ),
       ),
     );
   }
