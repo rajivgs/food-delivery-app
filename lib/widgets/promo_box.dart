@@ -47,7 +47,7 @@ class PromoBox extends StatelessWidget {
                           color: Colors.white,
                         ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text(
                     promo.description,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
@@ -67,7 +67,7 @@ class PromoBox extends StatelessWidget {
 class PromoCustomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var path = new Path();
+    var path = Path();
     path.lineTo(0, 0);
     path.lineTo(0, size.height);
     path.lineTo(225, size.height);

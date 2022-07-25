@@ -1,3 +1,6 @@
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +12,8 @@ import 'screens/screens.dart';
 import 'simple_bloc_observer.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   BlocOverrides.runZoned(
     () {
       runApp(MyApp());
@@ -38,7 +43,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => AutocompleteBloc(
                   placesRepository: context.read<PlacesRepository>())
-                ..add(LoadAutocomplete())),
+                ..add(const LoadAutocomplete())),
           BlocProvider(
               create: (context) => PlaceBloc(
                   placesRepository: context.read<PlacesRepository>())),

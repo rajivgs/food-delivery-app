@@ -26,7 +26,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     emit(BasketLoading());
     try {
       await Future<void>.delayed(const Duration(seconds: 1));
-      emit(BasketLoaded(basket: Basket()));
+      emit(const BasketLoaded(basket: Basket()));
     } catch (_) {}
   }
 

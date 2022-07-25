@@ -64,14 +64,14 @@ class RestaurantCard extends StatelessWidget {
                   children: [
                     Text(restaurant.name,
                         style: Theme.of(context).textTheme.headline5),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     RestaurantTags(restaurant: restaurant),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       '${restaurant.distance}km away - \$${restaurant.deliveryFee} delivery fee',
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                   ],
                 ),
               ],

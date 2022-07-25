@@ -12,7 +12,7 @@ class FilterLoading extends FilterState {}
 class FilterLoaded extends FilterState {
   final Filter filter;
 
-  FilterLoaded({this.filter = const Filter()});
+  const FilterLoaded({this.filter = const Filter()});
 
   @override
   List<Object> get props => [filter];

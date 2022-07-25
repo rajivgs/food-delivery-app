@@ -10,7 +10,7 @@ class DeliveryTimeScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => DeliveryTimeScreen(),
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
     );
   }
 
@@ -18,7 +18,7 @@ class DeliveryTimeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Delivery Time'),
+        title: const Text('Delivery Time'),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -28,10 +28,10 @@ class DeliveryTimeScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
-                  shape: RoundedRectangleBorder(),
+                  shape: const RoundedRectangleBorder(),
                   primary: Theme.of(context).colorScheme.secondary,
                 ),
-                child: Text('Select'),
+                child: const Text('Select'),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -59,25 +59,25 @@ class DeliveryTimeScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Delivery is Today!'),
                           duration: Duration(seconds: 2),
                         ),
                       );
                     },
-                    child: Text('Today'),
+                    child: const Text('Today'),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Delivery is Tomorrow!'),
                           duration: Duration(seconds: 2),
                         ),
                       );
                     },
-                    child: Text('Tomorrow'),
+                    child: const Text('Tomorrow'),
                   ),
                 ],
               ),

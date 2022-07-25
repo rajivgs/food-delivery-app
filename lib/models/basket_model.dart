@@ -8,7 +8,7 @@ class Basket extends Equatable {
   final Voucher? voucher;
   final DeliveryTime? deliveryTime;
 
-  Basket({
+  const Basket({
     this.items = const <MenuItem>[],
     this.cutlery = false,
     this.voucher,

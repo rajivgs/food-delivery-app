@@ -1,6 +1,11 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/models/models.dart';
+import 'package:food_delivery_app/models/voucher_model.dart';
 import '../../blocs/blocs.dart';
+import '../../models/models.dart';
 import '../../models/voucher_model.dart';
 
 class VoucherScreen extends StatelessWidget {
@@ -9,7 +14,7 @@ class VoucherScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => VoucherScreen(),
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
     );
   }
 
@@ -17,7 +22,7 @@ class VoucherScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Voucher'),
+        title: const Text('Voucher'),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -27,10 +32,10 @@ class VoucherScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
-                  shape: RoundedRectangleBorder(),
+                  shape: const RoundedRectangleBorder(),
                   primary: Theme.of(context).colorScheme.secondary,
                 ),
-                child: Text('Apply'),
+                child: const Text('Apply'),
                 onPressed: () {},
               )
             ],
@@ -59,8 +64,8 @@ class VoucherScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10),
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
                           hintText: 'Voucher Code'),
                     ),
                   ),
@@ -96,7 +101,7 @@ class VoucherScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                             color: Theme.of(context).colorScheme.secondary),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Expanded(
@@ -118,7 +123,7 @@ class VoucherScreen extends StatelessWidget {
                                   );
                               Navigator.of(context).pop();
                             },
-                            child: Text('Apply'),
+                            child: const Text('Apply'),
                           );
                         },
                       ),

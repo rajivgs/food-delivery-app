@@ -7,10 +7,12 @@ import '../../blocs/blocs.dart';
 class BasketScreen extends StatelessWidget {
   static const String routeName = '/basket';
 
+  const BasketScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      builder: (_) => BasketScreen(),
-      settings: RouteSettings(name: routeName),
+      builder: (_) => const BasketScreen(),
+      settings: const RouteSettings(name: routeName),
     );
   }
 
@@ -18,13 +20,13 @@ class BasketScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Basket'),
+        title: const Text('Basket'),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/edit-basket');
               },
-              icon: Icon(Icons.edit))
+              icon: const Icon(Icons.edit))
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -35,10 +37,10 @@ class BasketScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
-                  shape: RoundedRectangleBorder(),
+                  shape: const RoundedRectangleBorder(),
                   primary: Theme.of(context).colorScheme.secondary,
                 ),
-                child: Text('Apply'),
+                child: const Text('Apply'),
                 onPressed: () {},
               )
             ],
@@ -78,8 +80,8 @@ class BasketScreen extends StatelessWidget {
                   BlocBuilder<BasketBloc, BasketState>(
                     builder: (context, state) {
                       if (state is BasketLoading) {
-                        return Center(
-                          child: CircularProgressIndicator(),
+                        return const Center(
+                          child: const CircularProgressIndicator(),
                         );
                       }
                       if (state is BasketLoaded) {
@@ -92,12 +94,12 @@ class BasketScreen extends StatelessWidget {
                                   Theme.of(context).colorScheme.primary,
                               onChanged: (bool? newValue) {
                                 context.read<BasketBloc>().add(
-                                      ToggleSwitch(),
+                                      const ToggleSwitch(),
                                     );
                               }),
                         );
                       } else {
-                        return Text('Something went wrong.');
+                        return const Text('Something went wrong.');
                       }
                     },
                   ),
@@ -113,7 +115,7 @@ class BasketScreen extends StatelessWidget {
             BlocBuilder<BasketBloc, BasketState>(
               builder: (context, state) {
                 if (state is BasketLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -173,7 +175,7 @@ class BasketScreen extends StatelessWidget {
                                               .secondary,
                                         ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   Expanded(
@@ -195,7 +197,7 @@ class BasketScreen extends StatelessWidget {
                           },
                         );
                 } else {
-                  return Text('Something went wrong.');
+                  return const Text('Something went wrong.');
                 }
               },
             ),
@@ -220,7 +222,7 @@ class BasketScreen extends StatelessWidget {
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   Text(
                                     'Delivery in 20 minutes',
                                     style:
@@ -249,7 +251,7 @@ class BasketScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.headline6,
                               );
                       } else {
-                        return Text('Something went wrong');
+                        return const Text('Something went wrong');
                       }
                     },
                   ),
@@ -276,7 +278,7 @@ class BasketScreen extends StatelessWidget {
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   Text(
                                     'Do you have a voucher?',
                                     style:
@@ -304,7 +306,7 @@ class BasketScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.headline6,
                               );
                       } else {
-                        return Text('Something went wrong');
+                        return const Text('Something went wrong');
                       }
                     },
                   ),
@@ -325,7 +327,7 @@ class BasketScreen extends StatelessWidget {
               child: BlocBuilder<BasketBloc, BasketState>(
                 builder: (context, state) {
                   if (state is BasketLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   if (state is BasketLoaded) {
@@ -345,7 +347,7 @@ class BasketScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -359,7 +361,7 @@ class BasketScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -388,7 +390,7 @@ class BasketScreen extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
                 },
               ),

@@ -13,7 +13,7 @@ class LocationSearchBox extends StatelessWidget {
     return BlocBuilder<AutocompleteBloc, AutocompleteState>(
         builder: (context, state) {
       if (state is AutocompleteLoading) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       }
@@ -25,15 +25,15 @@ class LocationSearchBox extends StatelessWidget {
               filled: true,
               fillColor: Colors.white,
               hintText: 'Enter Your Location',
-              suffixIcon: Icon(Icons.search),
+              suffixIcon: const Icon(Icons.search),
               contentPadding:
                   const EdgeInsets.only(left: 20.0, bottom: 5.0, top: 5.0),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(10),
               ),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -45,7 +45,7 @@ class LocationSearchBox extends StatelessWidget {
           ),
         );
       } else {
-        return Text('Something went wrong');
+        return const Text('Something went wrong');
       }
     });
   }

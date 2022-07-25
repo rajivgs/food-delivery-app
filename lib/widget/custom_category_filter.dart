@@ -13,7 +13,7 @@ class CustomCategoryFilter extends StatelessWidget {
     return BlocBuilder<FilterBloc, FilterState>(
       builder: (context, state) {
         if (state is FilterLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -63,7 +63,7 @@ class CustomCategoryFilter extends StatelessWidget {
             },
           );
         } else {
-          return Text('Something went wrong.');
+          return const Text('Something went wrong.');
         }
       },
     );

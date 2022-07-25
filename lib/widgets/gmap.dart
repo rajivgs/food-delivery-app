@@ -13,7 +13,7 @@ class Gmap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: GoogleMap(
         myLocationEnabled: true,

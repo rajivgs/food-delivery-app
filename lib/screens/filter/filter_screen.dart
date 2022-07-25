@@ -10,14 +10,14 @@ class FilterScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => FilterScreen(),
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Filter')),
+      appBar: AppBar(title: const Text('Filter')),
       bottomNavigationBar: BottomAppBar(
         child: Container(
             child: Row(
@@ -26,7 +26,7 @@ class FilterScreen extends StatelessWidget {
             BlocBuilder<FilterBloc, FilterState>(
               builder: (context, state) {
                 if (state is FilterLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -34,10 +34,10 @@ class FilterScreen extends StatelessWidget {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(),
+                      shape: const RoundedRectangleBorder(),
                       primary: Theme.of(context).colorScheme.secondary,
                     ),
-                    child: Text('Apply'),
+                    child: const Text('Apply'),
                     onPressed: () {
                       var categories = state.filter.categoryFilters
                           .where((filter) => filter.value)
@@ -71,7 +71,7 @@ class FilterScreen extends StatelessWidget {
                     },
                   );
                 } else {
-                  return Text('Something went wrong.');
+                  return const Text('Something went wrong.');
                 }
               },
             ),
@@ -89,14 +89,14 @@ class FilterScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
             ),
-            CustomPriceFilter(),
+            const CustomPriceFilter(),
             Text(
               'Category',
               style: Theme.of(context).textTheme.headline4!.copyWith(
                     color: Theme.of(context).colorScheme.secondary,
                   ),
             ),
-            CustomCategoryFilter(),
+            const CustomCategoryFilter(),
           ],
         ),
       ),

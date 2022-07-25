@@ -22,17 +22,17 @@ class FoodSearchBox extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.only(left: 20.0, bottom: 5.0, top: 12.5),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 onChanged: (value) {}),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Container(
             margin: const EdgeInsets.only(right: 5.0),
             width: 50,
