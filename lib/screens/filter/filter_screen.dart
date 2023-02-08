@@ -1,29 +1,25 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_app/bloc/filter/filter_bloc.dart';
-
-import '../../model/model.dart';
-import '../../widget/widget.dart';
+import '../../blocs/blocs.dart';
+import '../../models/restaurant_model.dart';
+import '../../widgets/widgets.dart';
 
 class FilterScreen extends StatelessWidget {
-  static const String routeName = '/filter';
+  static const String routeName = '/filters';
+
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => FilterScreen(),
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
     );
   }
-
-  const FilterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Filter")),
+      appBar: AppBar(title: const Text('Filter')),
       bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
+        child: Container(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -33,42 +29,49 @@ class FilterScreen extends StatelessWidget {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is FilterLoaded) {
+                }
+                if (state is FilterLoaded) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(),
+                      shape: const RoundedRectangleBorder(),
                       primary: Theme.of(context).colorScheme.secondary,
                     ),
+                    child: const Text('Apply'),
                     onPressed: () {
                       var categories = state.filter.categoryFilters
                           .where((filter) => filter.value)
                           .map((filter) => filter.category.name)
                           .toList();
 
-                      var price = state.filter.priceFilters
+                      var prices = state.filter.priceFilters
                           .where((filter) => filter.value)
                           .map((filter) => filter.price.price)
                           .toList();
 
-                      List<Restaurant> restaurant = Restaurant.restaurants
+                      List<Restaurant> restaurants = Restaurant.restaurants
                           .where(
-                            (restaurant) => categories.any((category) =>
-                                restaurant.tags.contains(category)),
+                            (restaurant) => categories.any(
+                              (category) => restaurant.tags.contains(category),
+                            ),
                           )
                           .where(
-                            (restaurant) => price.any((price) =>
-                                restaurant.priceCategory.contains(price)),
+                            (restaurant) => prices.any(
+                              (price) =>
+                                  restaurant.priceCategory.contains(price),
+                            ),
                           )
                           .toList();
 
-                      Navigator.pushNamed(context, '/restaurant_listing',
-                          arguments: restaurant);
+                      Navigator.pushNamed(
+                        context,
+                        '/restaurant-listing',
+                        arguments: restaurants,
+                      );
                     },
-                    child: Text('Apply  '),
                   );
                 } else {
-                  return Text("Something went wrong!");
+                  return const Text('Something went wrong.');
                 }
               },
             ),
@@ -76,29 +79,24 @@ class FilterScreen extends StatelessWidget {
         )),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Price",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(color: Theme.of(context).primaryColor),
+              'Price',
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
             ),
-            //    CustomPriceFilter(price: Price.priceList),
-            CustomPriceFilter(),
-            SizedBox(height: 10),
+            const CustomPriceFilter(),
             Text(
-              "Category",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(color: Theme.of(context).primaryColor),
+              'Category',
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
             ),
-            //  CustomCategoryFilter(categories: Category.categories),
-            CustomCategoryFilter(),
+            const CustomCategoryFilter(),
           ],
         ),
       ),
